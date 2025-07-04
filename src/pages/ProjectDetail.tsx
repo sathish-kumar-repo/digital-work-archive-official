@@ -1,15 +1,23 @@
-
-import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowLeft, ExternalLink, Github, Calendar, Tag, CheckCircle, AlertCircle, Lightbulb } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { getProjectById } from '@/data/projects';
-import { useTheme } from '@/hooks/useTheme';
+import { useParams, Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  ExternalLink,
+  Github,
+  Calendar,
+  Tag,
+  CheckCircle,
+  AlertCircle,
+  Lightbulb,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { getProjectById } from "@/data/projects";
+import { useTheme } from "@/hooks/useTheme";
 
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -18,12 +26,14 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <div className={`min-h-screen ${isDarkMode ? 'dark' : ''}`}>
+      <div className={`min-h-screen ${isDarkMode ? "dark" : ""}`}>
         <div className="bg-background text-foreground">
           <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
           <div className="container mx-auto px-4 py-16 text-center">
             <h1 className="text-2xl font-bold mb-4">Project Not Found</h1>
-            <p className="text-muted-foreground mb-8">The project you're looking for doesn't exist.</p>
+            <p className="text-muted-foreground mb-8">
+              The project you're looking for doesn't exist.
+            </p>
             <Link to="/">
               <Button>
                 <ArrowLeft className="h-4 w-4 mr-2" />
@@ -38,13 +48,13 @@ const ProjectDetail = () => {
   }
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'dark' : ''}`}>
+    <div className={`min-h-screen ${isDarkMode ? "dark" : ""}`}>
       <div className="bg-background text-foreground">
         <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-        
+
         <main className="container mx-auto px-4 py-8">
           {/* Back Button */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="mb-6"
@@ -58,7 +68,7 @@ const ProjectDetail = () => {
           </motion.div>
 
           {/* Project Header */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="mb-8"
@@ -67,12 +77,15 @@ const ProjectDetail = () => {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-4">
                   <h1 className="text-4xl font-bold">{project.title}</h1>
-                  <Badge variant="secondary" className="flex items-center gap-1">
+                  <Badge
+                    variant="secondary"
+                    className="flex items-center gap-1"
+                  >
                     <Tag className="h-3 w-3" />
                     {project.category}
                   </Badge>
                 </div>
-                
+
                 <p className="text-xl text-muted-foreground mb-4">
                   {project.description}
                 </p>
@@ -80,10 +93,10 @@ const ProjectDetail = () => {
                 <div className="flex items-center gap-4 mb-6">
                   <div className="flex items-center text-sm text-muted-foreground">
                     <Calendar className="h-4 w-4 mr-2" />
-                    {new Date(project.createdAt).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
+                    {new Date(project.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
                     })}
                   </div>
                 </div>
@@ -99,7 +112,11 @@ const ProjectDetail = () => {
                 <div className="flex flex-wrap gap-3">
                   {project.liveUrl && (
                     <Button asChild>
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <ExternalLink className="h-4 w-4 mr-2" />
                         Live Demo
                       </a>
@@ -107,7 +124,11 @@ const ProjectDetail = () => {
                   )}
                   {project.githubUrl && (
                     <Button variant="outline" asChild>
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <Github className="h-4 w-4 mr-2" />
                         View Source
                       </a>
@@ -118,8 +139,8 @@ const ProjectDetail = () => {
 
               {/* Project Image */}
               <div className="lg:w-1/2">
-                <img 
-                  src={project.image} 
+                <img
+                  src={project.image}
                   alt={project.title}
                   className="w-full rounded-lg shadow-lg"
                 />
@@ -132,7 +153,7 @@ const ProjectDetail = () => {
           {/* Project Details */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Description */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -150,7 +171,7 @@ const ProjectDetail = () => {
             </motion.div>
 
             {/* Features */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
@@ -176,7 +197,7 @@ const ProjectDetail = () => {
             </motion.div>
 
             {/* Challenges */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
@@ -202,7 +223,7 @@ const ProjectDetail = () => {
             </motion.div>
 
             {/* Learnings */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
@@ -229,7 +250,7 @@ const ProjectDetail = () => {
           </div>
 
           {/* Navigation */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
